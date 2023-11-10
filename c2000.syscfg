@@ -1,0 +1,188 @@
+/**
+ * These arguments were used when this file was generated. They will be automatically applied on subsequent loads
+ * via the GUI or CLI. Run CLI with '--help' for additional information on how to override these arguments.
+ * @cliArgs --device "F280013x" --package "48PT" --part "F280013x_48PT" --context "system" --product "C2000WARE@5.00.00.00"
+ * @versions {"tool":"1.18.0+3266"}
+ */
+
+/**
+ * Import the modules used in this configuration.
+ */
+const analog      = scripting.addModule("/driverlib/analog.js", {}, false);
+const analog1     = analog.addInstance();
+const cmpss_lite  = scripting.addModule("/driverlib/cmpss_lite.js", {}, false);
+const cmpss_lite1 = cmpss_lite.addInstance();
+const cmpss_lite2 = cmpss_lite.addInstance();
+const cmpss_lite3 = cmpss_lite.addInstance();
+const cputimer    = scripting.addModule("/driverlib/cputimer.js", {}, false);
+const cputimer1   = cputimer.addInstance();
+const gpio        = scripting.addModule("/driverlib/gpio.js", {}, false);
+const gpio1       = gpio.addInstance();
+const gpio2       = gpio.addInstance();
+const gpio3       = gpio.addInstance();
+const gpio4       = gpio.addInstance();
+const gpio5       = gpio.addInstance();
+const gpio6       = gpio.addInstance();
+const gpio7       = gpio.addInstance();
+const gpio8       = gpio.addInstance();
+const gpio9       = gpio.addInstance();
+const gpio10      = gpio.addInstance();
+const gpio11      = gpio.addInstance();
+const gpio12      = gpio.addInstance();
+const gpio13      = gpio.addInstance();
+const gpio14      = gpio.addInstance();
+const gpio15      = gpio.addInstance();
+const gpio16      = gpio.addInstance();
+const gpio17      = gpio.addInstance();
+const gpio18      = gpio.addInstance();
+const sci         = scripting.addModule("/driverlib/sci.js", {}, false);
+const sci1        = sci.addInstance();
+
+/**
+ * Write custom configuration values to the imported modules.
+ */
+cmpss_lite1.$name               = "CURRENT_SENSE1";
+cmpss_lite1.cmpssLiteBase       = "CMPSSLITE3_BASE";
+cmpss_lite1.enableModule        = true;
+cmpss_lite1.highCompNegative    = "CMPSS_INSRC_PIN";
+cmpss_lite1.asysCMPHPMXSELValue = "4";
+cmpss_lite1.asysCMPLPMXSELValue = "4";
+
+cmpss_lite2.$name               = "CURRENT_SENSE2";
+cmpss_lite2.highCompNegative    = "CMPSS_INSRC_PIN";
+cmpss_lite2.cmpssLiteBase       = "CMPSSLITE4_BASE";
+cmpss_lite2.enableModule        = true;
+cmpss_lite2.asysCMPHPMXSELValue = "1";
+cmpss_lite2.asysCMPHNMXSELValue = "0";
+cmpss_lite2.asysCMPLPMXSELValue = "1";
+cmpss_lite2.asysCMPLNMXSELValue = "0";
+
+cmpss_lite3.$name               = "CURRENT_SENSE3";
+cmpss_lite3.highCompNegative    = "CMPSS_INSRC_PIN";
+cmpss_lite3.enableModule        = true;
+cmpss_lite3.asysCMPHPMXSELValue = "4";
+cmpss_lite3.asysCMPLPMXSELValue = "4";
+
+cmpss_lite1.analog       = analog1;
+cmpss_lite2.analog       = analog1;
+cmpss_lite3.analog       = analog1;
+analog1.$name            = "CURR_SENSE_PINS";
+analog1.useCase          = "CUSTOM";
+analog1.useInterfacePins = ["A12/C1","A15/C7, C4/A14","A4/C14","A5/C2","A7/C3","A8/C11"];
+
+cputimer1.$name                    = "TIMER_10S";
+cputimer1.emulationMode            = "CPUTIMER_EMULATIONMODE_STOPATZERO";
+cputimer1.enableInterrupt          = true;
+cputimer1.registerInterrupts       = true;
+cputimer1.timerPeriod              = 1200000000;
+cputimer1.timerInt.enableInterrupt = true;
+
+gpio1.$name           = "SWITCH1";
+gpio1.direction       = "GPIO_DIR_MODE_OUT";
+gpio1.gpioPin.$assign = "GPIO4";
+
+gpio2.$name           = "SWITCH2";
+gpio2.direction       = "GPIO_DIR_MODE_OUT";
+gpio2.gpioPin.$assign = "GPIO18";
+
+gpio3.direction       = "GPIO_DIR_MODE_OUT";
+gpio3.$name           = "SWITCH3";
+gpio3.gpioPin.$assign = "GPIO24";
+
+gpio4.direction       = "GPIO_DIR_MODE_OUT";
+gpio4.$name           = "SWITCH4";
+gpio4.gpioPin.$assign = "GPIO16";
+
+gpio5.$name           = "SWITCH5";
+gpio5.direction       = "GPIO_DIR_MODE_OUT";
+gpio5.gpioPin.$assign = "GPIO33";
+
+gpio6.direction       = "GPIO_DIR_MODE_OUT";
+gpio6.$name           = "SWITCH6";
+gpio6.gpioPin.$assign = "GPIO12";
+
+gpio7.direction       = "GPIO_DIR_MODE_OUT";
+gpio7.$name           = "SWITCH7";
+gpio7.gpioPin.$assign = "GPIO13";
+
+gpio8.direction       = "GPIO_DIR_MODE_OUT";
+gpio8.$name           = "SWITCH8";
+gpio8.gpioPin.$assign = "GPIO230";
+
+gpio9.direction       = "GPIO_DIR_MODE_OUT";
+gpio9.$name           = "SWITCH9";
+gpio9.gpioPin.$assign = "GPIO227";
+
+gpio10.direction       = "GPIO_DIR_MODE_OUT";
+gpio10.$name           = "SWITCH10";
+gpio10.gpioPin.$assign = "GPIO224";
+
+gpio11.direction       = "GPIO_DIR_MODE_OUT";
+gpio11.$name           = "SWITCH11";
+gpio11.gpioPin.$assign = "GPIO226";
+
+gpio12.direction       = "GPIO_DIR_MODE_OUT";
+gpio12.$name           = "SWITCH12";
+gpio12.gpioPin.$assign = "GPIO28";
+
+gpio13.direction       = "GPIO_DIR_MODE_OUT";
+gpio13.$name           = "SWITCH13";
+gpio13.gpioPin.$assign = "GPIO29";
+
+gpio14.direction       = "GPIO_DIR_MODE_OUT";
+gpio14.$name           = "SWITCH14";
+gpio14.gpioPin.$assign = "GPIO6";
+
+gpio15.direction       = "GPIO_DIR_MODE_OUT";
+gpio15.$name           = "SWITCH15";
+gpio15.gpioPin.$assign = "GPIO5";
+
+gpio16.direction       = "GPIO_DIR_MODE_OUT";
+gpio16.$name           = "SWITCH16";
+gpio16.gpioPin.$assign = "GPIO7";
+
+gpio17.direction       = "GPIO_DIR_MODE_OUT";
+gpio17.$name           = "SWITCH17";
+gpio17.gpioPin.$assign = "GPIO2";
+
+gpio18.direction       = "GPIO_DIR_MODE_OUT";
+gpio18.$name           = "SWITCH18";
+gpio18.gpioPin.$assign = "GPIO3";
+
+sci1.$name         = "UART";
+sci1.useInterrupts = false;
+sci1.baudRates     = 57600;
+sci1.sci.$assign   = "SCIA";
+
+/**
+ * Pinmux solution for unlocked pins/peripherals. This ensures that minor changes to the automatic solver in a future
+ * version of the tool will not impact the pinmux you originally saw.  These lines can be completely deleted in order to
+ * re-solve from scratch.
+ */
+analog1.analog.$suggestSolution                      = "ANALOG";
+analog1.analog["a12/c1Pin"].$suggestSolution         = "A12/C1";
+analog1.analog["a15/c7, c4/a14Pin"].$suggestSolution = "A15/C7, C4/A14";
+analog1.analog["a4/c14Pin"].$suggestSolution         = "A4/C14";
+analog1.analog["a5/c2Pin"].$suggestSolution          = "A5/C2";
+analog1.analog["a7/c3Pin"].$suggestSolution          = "A7/C3";
+analog1.analog["a8/c11Pin"].$suggestSolution         = "A8/C11";
+gpio1.gpioPin["GPIO#"].$suggestSolution              = "GPIO4";
+gpio2.gpioPin["GPIO#"].$suggestSolution              = "GPIO18, X2";
+gpio3.gpioPin["GPIO#"].$suggestSolution              = "GPIO24";
+gpio4.gpioPin["GPIO#"].$suggestSolution              = "GPIO16";
+gpio5.gpioPin["GPIO#"].$suggestSolution              = "GPIO33";
+gpio6.gpioPin["GPIO#"].$suggestSolution              = "A20/C20, GPIO12";
+gpio7.gpioPin["GPIO#"].$suggestSolution              = "A19/C19, GPIO13";
+gpio8.gpioPin["GPIO#"].$suggestSolution              = "A10/C10, GPIO230";
+gpio9.gpioPin["GPIO#"].$suggestSolution              = "C8/A9, GPIO227";
+gpio10.gpioPin["GPIO#"].$suggestSolution             = "A2/C9, GPIO224";
+gpio11.gpioPin["GPIO#"].$suggestSolution             = "A6, C6, GPIO226, GPIO228";
+gpio12.gpioPin["GPIO#"].$suggestSolution             = "A16/C16, GPIO28";
+gpio13.gpioPin["GPIO#"].$suggestSolution             = "GPIO29";
+gpio14.gpioPin["GPIO#"].$suggestSolution             = "GPIO6";
+gpio15.gpioPin["GPIO#"].$suggestSolution             = "GPIO5";
+gpio16.gpioPin["GPIO#"].$suggestSolution             = "GPIO7";
+gpio17.gpioPin["GPIO#"].$suggestSolution             = "GPIO2";
+gpio18.gpioPin["GPIO#"].$suggestSolution             = "GPIO3";
+sci1.sci.sci_rxPin.$suggestSolution                  = "GPIO0";
+sci1.sci.sci_txPin.$suggestSolution                  = "GPIO1";
