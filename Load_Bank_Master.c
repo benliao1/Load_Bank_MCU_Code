@@ -122,14 +122,14 @@ void set_switch_state(uint8_t switch_num, uint8_t desired_state)
 
 /*
  * Function to set the switch state to specified state. Handles ZCS.
- *  - desired_state: 32-bit bitmap with least signifant 18 bits dictating desired state of the 18 switches
+ *  - desired_state: 32-bit bitmap with least significant 18 bits dictating desired state of the 18 switches
  *  For example, if desired_state is 0b0000 0000 0000 0000 0001 0001 0001 0001, this would mean the desired
  *  state is switch numbers 1, 5, 9, 13, and 17 on
  *  Returns a status of 0 (ok) or 1 (zcs timeout)
  */
 uint8_t set_all_switches(uint32_t desired_state)
 {
-    int i;
+    uint8_t i;
     uint8_t phase;
     uint8_t ret = 0;
 
@@ -152,7 +152,7 @@ uint8_t set_all_switches(uint32_t desired_state)
                 CPUTimer_startTimer(TIMER_10S_BASE);
 
                 // while the comparator has not yet changed from the original value and the timer has not fired yet, block
-                while (get_comparator_value(phase) == original_comp_value && !timer_fired);
+                while ((get_comparator_value(phase) == original_comp_value) && !timer_fired);
 
                 // if timer fired, set the return value to 1, and don't turn on this phase's switches
                 if (timer_fired == 1) {
@@ -161,7 +161,7 @@ uint8_t set_all_switches(uint32_t desired_state)
                     // switch all of the switches in this phase to desired state
                     for (i = 1; i <= NUM_SWITCHES; i++) {
                         // if this switch is in this phase, set its desired state
-                        if (phases[phase - 1] & (1 << (i - 1))) {
+                        if (phases[phase - 1] & ((uint32_t)1 << (i - 1))) {
                             set_switch_state(i, (desired_state >> (i - 1)) & 1);
                         }
                     }
@@ -321,12 +321,12 @@ void process_phase_query_msg()
     char header_str[BUFSIZE] = "PHASE ";
     int i;
 
-    // copy the header into the msg first
+    // copy the header into the msg buffer first
     for (i = 0; header_str[i] != '\0'; i++) {
         msg[i] = header_str[i];
     }
 
-    // copy the three bitmasks, one after the other, into the message
+    // copy the three bitmasks sequentially into the msg buffer
     mask_to_buf(msg + i, phases[0]);
     mask_to_buf(msg + i + 4, phases[1]);
     mask_to_buf(msg + i + 8, phases[2]);
@@ -410,7 +410,7 @@ void main(void)
     // ********************************** Main Code ******************************** //
 
     // Set all switches off on boot
-    set_all_switches(0);
+    set_all_switches(0b111111111111111111);
 
     // Buffer to hold all messages
     char msg[BUFSIZE];
@@ -424,37 +424,37 @@ void main(void)
         // get a new message from client; blocks until new message received
         read_msg(msg);
 
-        // if ZCS query message sent, handle it
+        // if ZCS query message received, handle it
         if (strncmp(msg, "ZCS?", 4) == 0) {
             process_zcs_query_msg();
             continue;
         }
 
-        // if ZCS message sent, handle it
+        // if ZCS message received, handle it
         if (strncmp(msg, "ZCS", 3) == 0) {
             process_zcs_msg(msg);
             continue;
         }
 
-        // if SW query message sent, handle it
+        // if SW query message received, handle it
         if (strncmp(msg, "SW?", 3) == 0) {
             process_sw_query_msg();
             continue;
         }
 
-        // if SW message sent, handle it
+        // if SW message received, handle it
         if (strncmp(msg, "SW", 2) == 0) {
             process_sw_msg(msg);
             continue;
         }
 
-        // if PHASE query message sent, handle it
+        // if PHASE query message received, handle it
         if (strncmp(msg, "PHASE?", 6) == 0) {
             process_phase_query_msg();
             continue;
         }
 
-        // if PHASE message sent, handle it
+        // if PHASE message received, handle it
         if (strncmp(msg, "PHASE", 5) == 0) {
             process_phase_msg(msg);
             continue;
