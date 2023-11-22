@@ -51,14 +51,16 @@ SECTIONS
    .bss             : > RAMLS0
    .bss:output      : > RAMLS0
    .init_array      : >> FLASH_BANK0_SEC_0_7, ALIGN(8)
-   .const           : >> FLASH_BANK0_SEC_32_39, ALIGN(8)
+//   .const           : >> FLASH_BANK0_SEC_32_39, ALIGN(8)
+   .const           : >> FLASH_BANK0_SEC_24_31, ALIGN(8)
    .data            : > RAMLS0
    .sysmem          : > RAMLS0
   .bss:cio          : > RAMLS0
 #else
    .pinit           : >> FLASH_BANK0_SEC_0_7, ALIGN(8)
    .ebss            : > RAMLS0
-   .econst          : >> FLASH_BANK0_SEC_32_39, ALIGN(8)
+//   .econst          : >> FLASH_BANK0_SEC_32_39, ALIGN(8)
+   .econst          : >> FLASH_BANK0_SEC_24_31, ALIGN(8)
    .esysmem         : > RAMLS0
    .cio             : > RAMLS0
 #endif

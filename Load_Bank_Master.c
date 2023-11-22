@@ -410,7 +410,7 @@ void main(void)
     // ********************************** Main Code ******************************** //
 
     // Set all switches off on boot
-    set_all_switches(0b111111111111111111);
+    set_all_switches(0);
 
     // Buffer to hold all messages
     char msg[BUFSIZE];
