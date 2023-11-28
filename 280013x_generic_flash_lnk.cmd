@@ -14,22 +14,25 @@ MEMORY
    RESET            : origin = 0x003FFFC0, length = 0x00000002
 
    /* Flash sectors */
-   FLASH_BANK0_SEC_0_7     : origin = 0x080002, length = 0x1FFE  /* on-chip Flash */
-   FLASH_BANK0_SEC_8_15    : origin = 0x082000, length = 0x2000  /* on-chip Flash */
-   FLASH_BANK0_SEC_16_23   : origin = 0x084000, length = 0x2000  /* on-chip Flash */
-   FLASH_BANK0_SEC_24_31   : origin = 0x086000, length = 0x2000  /* on-chip Flash */
-   FLASH_BANK0_SEC_32_39   : origin = 0x088000, length = 0x2000  /* on-chip Flash */
-   FLASH_BANK0_SEC_40_47   : origin = 0x08A000, length = 0x2000  /* on-chip Flash */
-   FLASH_BANK0_SEC_48_55   : origin = 0x08C000, length = 0x2000  /* on-chip Flash */
-   FLASH_BANK0_SEC_56_63   : origin = 0x08E000, length = 0x2000  /* on-chip Flash */
-   FLASH_BANK0_SEC_64_71   : origin = 0x090000, length = 0x2000  /* on-chip Flash */
-   FLASH_BANK0_SEC_72_79   : origin = 0x092000, length = 0x2000  /* on-chip Flash */
-   FLASH_BANK0_SEC_80_87   : origin = 0x094000, length = 0x2000  /* on-chip Flash */
-   FLASH_BANK0_SEC_88_95   : origin = 0x096000, length = 0x2000  /* on-chip Flash */
-   FLASH_BANK0_SEC_96_103  : origin = 0x098000, length = 0x2000  /* on-chip Flash */
-   FLASH_BANK0_SEC_104_111 : origin = 0x09A000, length = 0x2000  /* on-chip Flash */
-   FLASH_BANK0_SEC_112_119 : origin = 0x09C000, length = 0x2000  /* on-chip Flash */
-   FLASH_BANK0_SEC_120_127 : origin = 0x09E000, length = 0x1FF0  /* on-chip Flash */
+   FLASH_BANK0_SEC_0_31		: origin = 0x080002, length = 0x7FEE
+   /*
+   FLASH_BANK0_SEC_0_7     : origin = 0x080002, length = 0x1FFE
+   FLASH_BANK0_SEC_8_15    : origin = 0x082000, length = 0x2000
+   FLASH_BANK0_SEC_16_23   : origin = 0x084000, length = 0x2000
+   FLASH_BANK0_SEC_24_31   : origin = 0x086000, length = 0x2000
+   FLASH_BANK0_SEC_32_39   : origin = 0x088000, length = 0x2000
+   FLASH_BANK0_SEC_40_47   : origin = 0x08A000, length = 0x2000
+   FLASH_BANK0_SEC_48_55   : origin = 0x08C000, length = 0x2000
+   FLASH_BANK0_SEC_56_63   : origin = 0x08E000, length = 0x2000
+   FLASH_BANK0_SEC_64_71   : origin = 0x090000, length = 0x2000
+   FLASH_BANK0_SEC_72_79   : origin = 0x092000, length = 0x2000
+   FLASH_BANK0_SEC_80_87   : origin = 0x094000, length = 0x2000
+   FLASH_BANK0_SEC_88_95   : origin = 0x096000, length = 0x2000
+   FLASH_BANK0_SEC_96_103  : origin = 0x098000, length = 0x2000
+   FLASH_BANK0_SEC_104_111 : origin = 0x09A000, length = 0x2000
+   FLASH_BANK0_SEC_112_119 : origin = 0x09C000, length = 0x2000
+   FLASH_BANK0_SEC_120_127 : origin = 0x09E000, length = 0x1FF0
+   */
 
    // FLASH_BANK0_SEC_127_RSVD : origin = 0x0A0FF0, length = 0x0010  /* Reserve and do not use for code as per the errata advisory "Memory: Prefetching Beyond Valid Memory" */
 }
@@ -38,10 +41,10 @@ SECTIONS
 {
    codestart        : > BEGIN
 
-   .text            : >> FLASH_BANK0_SEC_8_15 | FLASH_BANK0_SEC_16_23 | FLASH_BANK0_SEC_24_31, ALIGN(8)
+   .text            : > FLASH_BANK0_SEC_0_31, ALIGN(8)
 
-   .cinit           : > FLASH_BANK0_SEC_0_7, ALIGN(8)
-   .switch          : > FLASH_BANK0_SEC_0_7, ALIGN(8)
+   .cinit           : > FLASH_BANK0_SEC_0_31, ALIGN(8)
+   .switch          : > FLASH_BANK0_SEC_0_31, ALIGN(8)
 
    .reset           : > RESET,  TYPE = DSECT /* not used, */
 
@@ -50,23 +53,23 @@ SECTIONS
 #if defined(__TI_EABI__)
    .bss             : > RAMLS0
    .bss:output      : > RAMLS0
-   .init_array      : >> FLASH_BANK0_SEC_0_7, ALIGN(8)
+   .init_array      : >> FLASH_BANK0_SEC_0_31, ALIGN(8)
 //   .const           : >> FLASH_BANK0_SEC_32_39, ALIGN(8)
-   .const           : >> FLASH_BANK0_SEC_24_31, ALIGN(8)
+   .const           : >> FLASH_BANK0_SEC_0_31, ALIGN(8)
    .data            : > RAMLS0
    .sysmem          : > RAMLS0
   .bss:cio          : > RAMLS0
 #else
-   .pinit           : >> FLASH_BANK0_SEC_0_7, ALIGN(8)
+   .pinit           : >> FLASH_BANK0_SEC_0_31, ALIGN(8)
    .ebss            : > RAMLS0
 //   .econst          : >> FLASH_BANK0_SEC_32_39, ALIGN(8)
-   .econst          : >> FLASH_BANK0_SEC_24_31, ALIGN(8)
+   .econst          : >> FLASH_BANK0_SEC_0_31, ALIGN(8)
    .esysmem         : > RAMLS0
    .cio             : > RAMLS0
 #endif
 
 #if defined(__TI_EABI__)
-   .TI.ramfunc      : LOAD = FLASH_BANK0_SEC_0_7,
+   .TI.ramfunc      : LOAD = FLASH_BANK0_SEC_0_31,
                       RUN = RAMLS0,
                       LOAD_START(RamfuncsLoadStart),
                       LOAD_SIZE(RamfuncsLoadSize),
@@ -76,7 +79,7 @@ SECTIONS
                       RUN_END(RamfuncsRunEnd),
                       ALIGN(8)
 #else
-   .TI.ramfunc      : LOAD = FLASH_BANK0_SEC_0_7,
+   .TI.ramfunc      : LOAD = FLASH_BANK0_SEC_0_31,
                       RUN = RAMLS0,
                       LOAD_START(_RamfuncsLoadStart),
                       LOAD_SIZE(_RamfuncsLoadSize),
@@ -88,6 +91,9 @@ SECTIONS
 #endif
 
     /*  Allocate IQ math areas: */
-   IQmath           : > FLASH_BANK0_SEC_32_39, ALIGN(8)
-   IQmathTables     : > FLASH_BANK0_SEC_32_39, ALIGN(8)
+   //IQmath           : > FLASH_BANK0_SEC_0_31, ALIGN(8)
+   //IQmathTables     : > FLASH_BANK0_SEC_0_31, ALIGN(8)
+
+      IQmath           : > RAMLS1
+      IQmathTables     : > RAMLS1
 }

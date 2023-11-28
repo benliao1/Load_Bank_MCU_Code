@@ -32,6 +32,7 @@ uint32_t comparator_num_mapping[3] = { CURRENT_SENSE1_BASE, CURRENT_SENSE2_BASE,
 /*
  * Implementation of strncmp, modified slightly from one found online
  */
+#pragma CODE_SECTION(strncmp, ".TI.ramfunc");
 int strncmp(char *s1, char *s2, uint8_t n)
 {
     do {
@@ -49,6 +50,7 @@ int strncmp(char *s1, char *s2, uint8_t n)
 /*
  * Function to clear a buffer buf of length len (set all bits to 0)
  */
+#pragma CODE_SECTION(clear_buf, ".TI.ramfunc");
 void clear_buf (char *buf, uint8_t len)
 {
     int i;
@@ -60,6 +62,7 @@ void clear_buf (char *buf, uint8_t len)
 /*
  * Function to recover a 32-bit bitmask from the first four bytes of the given buffer
  */
+#pragma CODE_SECTION(buf_to_mask, ".TI.ramfunc");
 uint32_t buf_to_mask (char *buf)
 {
     // initialize all bits to 0
@@ -74,6 +77,7 @@ uint32_t buf_to_mask (char *buf)
 /*
  * Function to pack a 32-bit bitmask into the first four bytes of the given buffer
  */
+#pragma CODE_SECTION(mask_to_buf, ".TI.ramfunc");
 void mask_to_buf (char *buf, uint32_t mask)
 {
     buf[0] = (char)((mask >> 24) & 0b11111111);
@@ -87,6 +91,7 @@ void mask_to_buf (char *buf, uint32_t mask)
 /*
  * Fetches the comparator output value of the current sensor attached to specified phase
  */
+#pragma CODE_SECTION(get_comparator_value, ".TI.ramfunc");
 uint8_t get_comparator_value (uint8_t phase_num)
 {
     uint32_t ret = CMPSS_getStatus(comparator_num_mapping[phase_num - 1]);
@@ -97,6 +102,7 @@ uint8_t get_comparator_value (uint8_t phase_num)
 /*
  * Interrupt service handler for 10 second timer
  */
+#pragma CODE_SECTION(INT_TIMER_10S_ISR, ".TI.ramfunc");
 __interrupt void INT_TIMER_10S_ISR (void)
 {
     // set the timer_fired flag to 1
@@ -113,6 +119,7 @@ __interrupt void INT_TIMER_10S_ISR (void)
  *  - switch_num: unsigned int from 1 to 18
  *  - desired_state: ON (1) or OFF (0)
  */
+#pragma CODE_SECTION(set_switch_state, ".TI.ramfunc");
 void set_switch_state(uint8_t switch_num, uint8_t desired_state)
 {
     if (switch_num >= 1 && switch_num <= 18) {
@@ -127,6 +134,7 @@ void set_switch_state(uint8_t switch_num, uint8_t desired_state)
  *  state is switch numbers 1, 5, 9, 13, and 17 on
  *  Returns a status of 0 (ok) or 1 (zcs timeout)
  */
+#pragma CODE_SECTION(set_all_switches, ".TI.ramfunc");
 uint8_t set_all_switches(uint32_t desired_state)
 {
     uint8_t i;
@@ -177,6 +185,7 @@ uint8_t set_all_switches(uint32_t desired_state)
 /*
  * Read one character from the SCI connection (copied from SCI EchoBack example from TI)
  */
+#pragma CODE_SECTION(read_char, ".TI.ramfunc");
 uint16_t read_char ()
 {
     uint16_t received_char = SCI_readCharBlockingFIFO(UART_BASE);
@@ -195,6 +204,7 @@ uint16_t read_char ()
  * Read a full message from the SCI connection
  *  - msg is a pointer to a buffer which is large enough to store the received message
  */
+#pragma CODE_SECTION(read_msg, ".TI.ramfunc");
 void read_msg (char *msg)
 {
     uint16_t msg_len = read_char(); // read the length of the message as first byte
@@ -209,6 +219,7 @@ void read_msg (char *msg)
  *  - message is a pointer to a buffer with a string terminated by '\n' to be written
  *  - len is the length of the message, in bytes, including '\n' but not '\0'
  */
+#pragma CODE_SECTION(write_msg, ".TI.ramfunc");
 void write_msg (char *msg, uint8_t len)
 {
     char buf[BUFSIZE];
@@ -229,6 +240,7 @@ void write_msg (char *msg, uint8_t len)
 /*
  * Process a ZCS command message (turn ZCS on or off)
  */
+#pragma CODE_SECTION(process_zcs_msg, ".TI.ramfunc");
 void process_zcs_msg (char *msg)
 {
     if (strncmp(msg + 4, "ON", 2) == 0) {
@@ -245,6 +257,7 @@ void process_zcs_msg (char *msg)
 /*
  * Process a SW command message (set state of the switches)
  */
+#pragma CODE_SECTION(process_sw_msg, ".TI.ramfunc");
 void process_sw_msg (char *msg)
 {
     uint32_t desired_state, ret = 0;
@@ -265,6 +278,7 @@ void process_sw_msg (char *msg)
 /*
  * Process a PHASE command message (set the phase definitions)
  */
+#pragma CODE_SECTION(process_phase_msg, ".TI.ramfunc");
 void process_phase_msg (char *msg)
 {
     // first bitmask starts at byte 7, second starts at byte 11, third starts at byte 15
@@ -278,6 +292,7 @@ void process_phase_msg (char *msg)
 /*
  * Process a ZCS query message (client asks whether ZCS is enabled or not)
  */
+#pragma CODE_SECTION(process_zcs_query_msg, ".TI.ramfunc");
 void process_zcs_query_msg ()
 {
     if (zcs == ON) {
@@ -290,6 +305,7 @@ void process_zcs_query_msg ()
 /*
  * Process a SW query message (client asks what the state of the switches is)
  */
+#pragma CODE_SECTION(process_sw_query_msg, ".TI.ramfunc");
 void process_sw_query_msg ()
 {
     // read the state of all of the switches
@@ -315,6 +331,7 @@ void process_sw_query_msg ()
 /*
  * Process a PHASE query message (client asks what the current phase definition are)
  */
+#pragma CODE_SECTION(process_phase_query_msg, ".TI.ramfunc");
 void process_phase_query_msg()
 {
     char msg[BUFSIZE];
@@ -392,6 +409,7 @@ void cascade_switches_test ()
 }
 
 // ******************************************************** Main Function ******************************************************** //
+
 void main(void)
 {
 
