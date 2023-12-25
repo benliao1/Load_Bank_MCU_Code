@@ -99,32 +99,34 @@ void PinMux_init()
 	GPIO_setPinConfig(GPIO_4_GPIO4);
 	// GPIO18 -> SWITCH2 Pinmux
 	GPIO_setPinConfig(GPIO_18_GPIO18);
-	// GPIO24 -> SWITCH3 Pinmux
-	GPIO_setPinConfig(GPIO_24_GPIO24);
-	// GPIO16 -> SWITCH4 Pinmux
+	// GPIO16 -> SWITCH3 Pinmux
 	GPIO_setPinConfig(GPIO_16_GPIO16);
-	// GPIO33 -> SWITCH5 Pinmux
+	// GPIO33 -> SWITCH4 Pinmux
 	GPIO_setPinConfig(GPIO_33_GPIO33);
-	// GPIO12 -> SWITCH6 Pinmux
+	// GPIO12 -> SWITCH5 Pinmux
 	GPIO_setPinConfig(GPIO_12_GPIO12);
 	// AGPIO -> GPIO mode selected
 	GPIO_setAnalogMode(12, GPIO_ANALOG_DISABLED);
-	// GPIO13 -> SWITCH7 Pinmux
+	// GPIO13 -> SWITCH6 Pinmux
 	GPIO_setPinConfig(GPIO_13_GPIO13);
 	// AGPIO -> GPIO mode selected
 	GPIO_setAnalogMode(13, GPIO_ANALOG_DISABLED);
-	// GPIO230 -> SWITCH8 Pinmux
+	// GPIO230 -> SWITCH7 Pinmux
 	GPIO_setPinConfig(GPIO_230_GPIO230);
 	// AGPIO -> GPIO mode selected
 	GPIO_setAnalogMode(230, GPIO_ANALOG_DISABLED);
-	// GPIO227 -> SWITCH9 Pinmux
+	// GPIO227 -> SWITCH8 Pinmux
 	GPIO_setPinConfig(GPIO_227_GPIO227);
 	// AGPIO -> GPIO mode selected
 	GPIO_setAnalogMode(227, GPIO_ANALOG_DISABLED);
-	// GPIO224 -> SWITCH10 Pinmux
+	// GPIO224 -> SWITCH9 Pinmux
 	GPIO_setPinConfig(GPIO_224_GPIO224);
 	// AGPIO -> GPIO mode selected
 	GPIO_setAnalogMode(224, GPIO_ANALOG_DISABLED);
+	// GPIO242 -> SWITCH10 Pinmux
+	GPIO_setPinConfig(GPIO_242_GPIO242);
+	// AGPIO -> GPIO mode selected
+	GPIO_setAnalogMode(242, GPIO_ANALOG_DISABLED);
 	// GPIO226 -> SWITCH11 Pinmux
 	GPIO_setPinConfig(GPIO_226_GPIO226);
 	// AGPIO -> GPIO mode selected

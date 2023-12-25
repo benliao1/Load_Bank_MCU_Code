@@ -87,35 +87,35 @@ gpio2.gpioPin.$assign = "GPIO18";
 
 gpio3.direction       = "GPIO_DIR_MODE_OUT";
 gpio3.$name           = "SWITCH3";
-gpio3.gpioPin.$assign = "GPIO24";
+gpio3.gpioPin.$assign = "GPIO16";
 
 gpio4.direction       = "GPIO_DIR_MODE_OUT";
 gpio4.$name           = "SWITCH4";
-gpio4.gpioPin.$assign = "GPIO16";
+gpio4.gpioPin.$assign = "GPIO33";
 
 gpio5.$name           = "SWITCH5";
 gpio5.direction       = "GPIO_DIR_MODE_OUT";
-gpio5.gpioPin.$assign = "GPIO33";
+gpio5.gpioPin.$assign = "GPIO12";
 
 gpio6.direction       = "GPIO_DIR_MODE_OUT";
 gpio6.$name           = "SWITCH6";
-gpio6.gpioPin.$assign = "GPIO12";
+gpio6.gpioPin.$assign = "GPIO13";
 
 gpio7.direction       = "GPIO_DIR_MODE_OUT";
 gpio7.$name           = "SWITCH7";
-gpio7.gpioPin.$assign = "GPIO13";
+gpio7.gpioPin.$assign = "GPIO230";
 
 gpio8.direction       = "GPIO_DIR_MODE_OUT";
 gpio8.$name           = "SWITCH8";
-gpio8.gpioPin.$assign = "GPIO230";
+gpio8.gpioPin.$assign = "GPIO227";
 
 gpio9.direction       = "GPIO_DIR_MODE_OUT";
 gpio9.$name           = "SWITCH9";
-gpio9.gpioPin.$assign = "GPIO227";
+gpio9.gpioPin.$assign = "GPIO224";
 
 gpio10.direction       = "GPIO_DIR_MODE_OUT";
 gpio10.$name           = "SWITCH10";
-gpio10.gpioPin.$assign = "GPIO224";
+gpio10.gpioPin.$assign = "GPIO242";
 
 gpio11.direction       = "GPIO_DIR_MODE_OUT";
 gpio11.$name           = "SWITCH11";
@@ -168,14 +168,14 @@ analog1.analog["a7/c3Pin"].$suggestSolution          = "A7/C3";
 analog1.analog["a8/c11Pin"].$suggestSolution         = "A8/C11";
 gpio1.gpioPin["GPIO#"].$suggestSolution              = "GPIO4";
 gpio2.gpioPin["GPIO#"].$suggestSolution              = "GPIO18, X2";
-gpio3.gpioPin["GPIO#"].$suggestSolution              = "GPIO24";
-gpio4.gpioPin["GPIO#"].$suggestSolution              = "GPIO16";
-gpio5.gpioPin["GPIO#"].$suggestSolution              = "GPIO33";
-gpio6.gpioPin["GPIO#"].$suggestSolution              = "A20/C20, GPIO12";
-gpio7.gpioPin["GPIO#"].$suggestSolution              = "A19/C19, GPIO13";
-gpio8.gpioPin["GPIO#"].$suggestSolution              = "A10/C10, GPIO230";
-gpio9.gpioPin["GPIO#"].$suggestSolution              = "C8/A9, GPIO227";
-gpio10.gpioPin["GPIO#"].$suggestSolution             = "A2/C9, GPIO224";
+gpio3.gpioPin["GPIO#"].$suggestSolution              = "GPIO16";
+gpio4.gpioPin["GPIO#"].$suggestSolution              = "GPIO33";
+gpio5.gpioPin["GPIO#"].$suggestSolution              = "A20/C20, GPIO12";
+gpio6.gpioPin["GPIO#"].$suggestSolution              = "A19/C19, GPIO13";
+gpio7.gpioPin["GPIO#"].$suggestSolution              = "A10/C10, GPIO230";
+gpio8.gpioPin["GPIO#"].$suggestSolution              = "C8/A9, GPIO227";
+gpio9.gpioPin["GPIO#"].$suggestSolution              = "A2/C9, GPIO224";
+gpio10.gpioPin["GPIO#"].$suggestSolution             = "A3/C5, GPIO242";
 gpio11.gpioPin["GPIO#"].$suggestSolution             = "A6, C6, GPIO226, GPIO228";
 gpio12.gpioPin["GPIO#"].$suggestSolution             = "A16/C16, GPIO28";
 gpio13.gpioPin["GPIO#"].$suggestSolution             = "GPIO29";
